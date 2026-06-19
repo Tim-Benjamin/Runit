@@ -1,0 +1,155 @@
+/* ── src/index.css ── */
+
+/* CSS Variables */
+:root {
+  --runit-bg:           #0a1f1c;
+  --runit-surface:      #0f2e29;
+  --runit-elevated:     #1a3a35;
+  --runit-accent:       #00c9a7;
+  --runit-accent-dark:  #00796b;
+  --runit-text:         #e8f5f3;
+  --runit-muted:        #7a9e99;
+  --runit-border:       rgba(0,201,167,0.15);
+  --runit-border-strong:rgba(0,201,167,0.3);
+}
+
+/* Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--runit-bg);
+  color: var(--runit-text);
+  font-family: 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--runit-accent);
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--runit-border); border-radius: 2px; }
+
+/* ── Navbar visibility rules ── */
+
+/* Desktop pill navbar — visible on desktop, hidden on mobile */
+.pill-navbar-desktop {
+  display: flex !important;
+}
+
+/* Mobile top bar — hidden by default */
+.mobile-topbar {
+  display: none !important;
+}
+
+/* ── Page content padding helpers ── */
+
+/* On desktop: content starts below the pill navbar (~72px) */
+.page-content {
+  padding-top: 80px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 100px;
+}
+
+/* ── Bottom pill nav ── */
+.bottom-pill-nav {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+/* ── Animations ── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.25s ease forwards;
+}
+
+/* ── Mobile breakpoint (≤640px) ── */
+@media (max-width: 640px) {
+
+  /* Hide desktop pill navbar on mobile */
+  .pill-navbar-desktop {
+    display: none !important;
+  }
+
+  /* Show mobile top bar on homepage only */
+  .mobile-topbar {
+    display: flex !important;
+  }
+
+  /* On mobile: no top padding needed since no top navbar
+     Bottom padding for the floating bottom nav */
+  .page-content {
+    padding-top: 20px;
+    padding-bottom: 100px;
+  }
+
+  /* Tighter horizontal padding on small screens */
+  .page-content-inner {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* Make grids single column on very small screens */
+  .grid-2-col {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Full-width buttons on mobile */
+  .pill-btn-desktop {
+    width: 100%;
+  }
+}
+
+/* ── Tablet breakpoint (641px–1024px) ── */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .page-content {
+    padding-top: 80px;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ── Desktop breakpoint (>1024px) ── */
+@media (min-width: 1025px) {
+  .page-content {
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
